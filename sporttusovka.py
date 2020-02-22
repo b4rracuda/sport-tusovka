@@ -125,9 +125,7 @@ def register(data_from_google):
 @socketio.on('create_event')
 def create_event(event_details):
     event_details = json.loads(event_details)
-    if Event.query.filter_by(startLat=event_details['startLat']).first() and
-    Event.query.filter_by(startLon=event_details['startLon']).first() and
-    Event.query.filter_by(datetime=event_details['datetime']).first():
+    if Event.query.filter_by(startLat=event_details['startLat']).first() and Event.query.filter_by(startLon=event_details['startLon']).first() and Event.query.filter_by(datetime=event_details['datetime']).first():
         emit('event_response', 'exists')
     else:
         new_event = Event(
