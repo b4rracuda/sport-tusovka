@@ -20,11 +20,11 @@ socketio = SocketIO(app)
 #db = SQLAlchemy(app)
 
 @app.route('/')
-def index():
+def splash():
     return render_template('splash.html')
 
 @app.route('/app')
-def index():
+def map():
     return render_template('map.html')
 
 @socketio.on('message')
