@@ -43,8 +43,8 @@ class Event(db.Model):
     __tablename__ = 'events'
 
     id = db.Column(db.Integer, primary_key=True)
-    datetime = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    startLat = db.Column(db.FLoat)
+    datetime = db.Column(db.DateTime, nullable=False)
+    startLat = db.Column(db.Float)
     startLon = db.Column(db.Float)
     finishLat = db.Column(db.Float)
     finishLon = db.Column(db.Float)

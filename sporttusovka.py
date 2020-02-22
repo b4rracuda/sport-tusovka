@@ -7,11 +7,8 @@ import secrets
 import os, stat
 from re import sub
 import ssl
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy(app)
-
-from models import Event, User
+#from flask_sqlalchemy import SQLAlchemy
+# from models import Event, User
 
 app = Flask(__name__,
             static_url_path='', 
@@ -20,6 +17,7 @@ app = Flask(__name__,
 
 app.config['SECRET_KEY'] = os.environ['FLASK_KEY']
 socketio = SocketIO(app)
+#db = SQLAlchemy(app)
 
 @app.route('/')
 def index():
