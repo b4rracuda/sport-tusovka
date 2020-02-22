@@ -105,8 +105,48 @@ def map():
 
 @socketio.on('login')
 def register(data_from_google):
-    data_from_google = json.dumps(data_from_google)
-    emit('api_results', processing_results_json)
+    data_from_google = json.loads(data_from_google)
+    if Users.query.filter_by(email=data_from_google['email']).first():
+        emit('login_response', 'logged in')
+    else:
+        new_user = Users(name=data_from_google['name'],
+            age=20,
+            telegram='none',
+            email=data_from_google['email'],
+            photo=data_from_google['image'],
+            description='helloworld'
+            )
+        db.session.add(new_user)
+        db.session.commit()
+        emit('login_response', 'signed up')
+
+@socketio.on('create_event')
+def create_event(event_details):
+    event_details = json.loads(event_details)
+    if Event.query.filter_by(startLat=event_details['startLat']).first() and
+    Event.query.filter_by(startLon=event_details['startLon']).first() and
+    Event.query.filter_by(datetime=event_details['datetime']).first():
+        emit('event_response', 'exists')
+    else:
+        new_event = Event(
+            datetime=event_details['datetime'],
+            startLat=event_details['startLat'],
+            length=event_details['length'],
+            startLon=event_details['startLon'],
+            finishLon=event_details['finishLon'],
+            finishLat=event_details['finishLat'],
+            level=event_details['level'],
+            creatorID=event_details['creatorID']
+            )
+        db.session.add(new_event)
+        db.session.commit()
+        emit('event_response', 'created_event')
+
+@socketio.on('fetch_events')
+def fetch_events(datetime):
+    events_at_date=Event.query.filter_by(datetime=datetime)
+    events_at_date = json.dumps(events_at_date)
+    emit('fetch_events', events_at_date)
 
 @app.route('/easter_egg')
 def easter_egg():
