@@ -92,9 +92,10 @@
 		var popup = L.popup();
 
 		function onMapClick(e) {
+			var popsUps = $('#create-popup');
 			popup
 				.setLatLng(e.latlng)
-				.setContent("You clicked the map at " + e.latlng.toString())
+				.setContent(popsUps)
 				.openOn(mymap);
 		}
 
@@ -102,16 +103,19 @@
 
 	}
 
-	var timepicker = new TimePicker('time', {
-	  lang: 'en',
-	  theme: 'dark'
-	});
-	timepicker.on('change', function(evt) {
-	  
-	  var value = (evt.hour || '00') + ':' + (evt.minute || '00');
-	  evt.element.value = value;
+	$(function(){
+		var timepicker = new TimePicker('time', {
+		  lang: 'en',
+		  theme: 'dark'
+		});
+		timepicker.on('change', function(evt) {
+		  
+		  var value = (evt.hour || '00') + ':' + (evt.minute || '00');
+		  evt.element.value = value;
 
+		});
 	});
+	
 </script>
 
 {% endblock %}
