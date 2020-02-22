@@ -1,4 +1,4 @@
-from app import db
+from sporttusovka import db
 
 participants = db.Table('participants',
     db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
