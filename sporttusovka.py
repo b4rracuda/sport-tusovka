@@ -107,7 +107,6 @@ def map():
 
 @socketio.on('login')
 def register(data_from_google):
-    data_from_google = json.loads(data_from_google)
     if Users.query.filter_by(email=data_from_google['email']).first():
         emit('login_response', 'logged in')
     else:
@@ -124,7 +123,6 @@ def register(data_from_google):
 
 @socketio.on('create_event')
 def create_event(event_details):
-    event_details = json.loads(event_details)
     if Event.query.filter_by(startLat=event_details['startLat']).first() and Event.query.filter_by(startLon=event_details['startLon']).first() and Event.query.filter_by(datetime=event_details['datetime']).first():
         emit('event_response', 'exists')
     else:
