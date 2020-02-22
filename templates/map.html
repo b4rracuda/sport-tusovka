@@ -2,9 +2,6 @@
 
 {% block content %}
 
-<script src="http://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script>
-	<link href="http://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.css" rel="stylesheet"/>
-
 <nav class="navbar fixed-top bg-dark navbar-dark py-0">			
 	<a class="navbar-brand d-flex flex-row align-items-center" href="#">
 		<img src="img/running2.svg" class="navbar-icon" />
@@ -92,30 +89,18 @@
 		var popup = L.popup();
 
 		function onMapClick(e) {
-			var popsUps = $('#create-popup');
 			popup
 				.setLatLng(e.latlng)
-				.setContent(popsUps)
+				.setContent("You clicked the map at " + e.latlng.toString())
 				.openOn(mymap);
+				
 		}
 
 		mymap.on('click', onMapClick);
 
+
 	}
 
-	$(function(){
-		var timepicker = new TimePicker('time', {
-		  lang: 'en',
-		  theme: 'dark'
-		});
-		timepicker.on('change', function(evt) {
-		  
-		  var value = (evt.hour || '00') + ':' + (evt.minute || '00');
-		  evt.element.value = value;
-
-		});
-	});
-	
 </script>
 
 {% endblock %}
