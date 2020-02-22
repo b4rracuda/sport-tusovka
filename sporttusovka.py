@@ -21,7 +21,11 @@ socketio = SocketIO(app)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('splash.html')
+
+@app.route('/app')
+def index():
+    return render_template('map.html')
 
 @socketio.on('message')
 def handle_audio():
