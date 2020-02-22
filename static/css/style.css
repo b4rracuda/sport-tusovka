@@ -63,3 +63,72 @@ button:hover {
 	width: 140px;
 	margin-bottom: 36px;
 }
+
+
+
+/** NAVBAR BEGINS **/
+	.nav-name {
+		margin-bottom: 0px;
+		padding: 0px 16px;
+		font-size: 24px;
+	}
+
+	.navbar-nav li {
+		padding: 0px 16px;
+	}
+
+	.navbar-nav li a {
+		color: white !important;
+		transition: .4s;
+	}
+
+	.navbar-nav li:hover a {
+		color: #785589 !important;
+	}
+
+	.navbar-icon {
+		width: 60px;
+		height: 60px;
+		margin: 0px 24px;
+	}
+
+	@media only screen and (max-width: 768px) {
+		.navbar-nav li {
+			padding: 0px 8px !important;
+		}
+
+		.navbar-icon {
+			margin: 0px 8px !important;
+		}
+	}
+/** NAVBAR ENDS**/
+
+
+/** ACCOUNT PAGE STARTS**/
+	.account-container {
+		background-color: white;
+		box-shadow: 2px 4px 16px #AAAAAA;
+		min-height: 96vh;
+		margin-bottom: 4vh;
+		padding-top: 70px;
+	}
+
+	.account-img {
+		border-radius: 50%;
+		width: 200px;
+		height: 200px;
+	}
+
+	.info {
+		color: white;
+		padding: 16px 24px;
+		font-size: 30px;
+		background-color: #785589;
+		border-radius: 16px;
+	}
+
+	.social-icon {
+		width: 36px;
+		height: 36px;
+	}
+/** ACCOUNT PAGE ENDS**/
