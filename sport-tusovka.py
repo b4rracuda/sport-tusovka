@@ -7,6 +7,11 @@ import secrets
 import os, stat
 from re import sub
 import ssl
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy(app)
+
+from models import Event, User
 
 app = Flask(__name__,
             static_url_path='', 
