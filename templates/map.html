@@ -124,9 +124,11 @@
 	.createpops{
 		display: block;
 		padding: 6px 10px;
-		border-radius: 20%;
+		border-radius: 20px;
 		border: 1px solid #785589;
-		color: #785589;
+		background: #785589;
+		color: #fff;
+		text-align: center;
 	}
 	.createpops:hover{
 		cursor: pointer;
@@ -183,7 +185,7 @@
 		function onMapClick(e) {
 			popup
 				.setLatLng(e.latlng)
-				.setContent("Координати: " + e.latlng.toString()+"<br><span class='createpops'>Створити тусовку?</span>")
+				.setContent("Координати: " + e.latlng.toString()+"<br><span class='createpops' id='create-right-bar-open'>Створити тусовку?</span>")
 				.openOn(mymap);
 
 		}
