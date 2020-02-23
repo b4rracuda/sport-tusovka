@@ -15,7 +15,7 @@
 			<button class="nav-link" onclick="alert('Просто клікни по потрібному місцю на мапі!');" >Створити</button>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" onclick="window.location.href='https://' + document.domain +'/account';">Ім'я Юзера</a>
+			<a class="nav-link" onclick="window.location.href='https://' + document.domain +'/account';"><b>Діма Іщук</b></a>
 		</li>
 	</ul>
 </nav>
@@ -122,7 +122,8 @@
 
 
 <script>
-
+	
+	var socket = io.connect('https://' + document.domain + ':' + location.port);
 	function getLocation() {
 	  if (navigator.geolocation) {
 	    navigator.geolocation.getCurrentPosition(initter);
@@ -188,7 +189,6 @@
 				'level':$('#create_level').val(),
 				'creatorid':1
 			};
-			var socket = io.connect('https://' + document.domain + ':' + location.port);
 			socket.emit('create_event', eventdata, function(res){
 				alert('data sent!');
 			});
@@ -206,8 +206,6 @@
 
 			 testlayer =  L.layerGroup([littleton, denver]).addTo(mymap);
 			
-
-			var socket = io.connect('https://' + document.domain + ':' + location.port);
 			socket.emit('fetch_events', getterdata, function(res){
 				console.log(res);
 				alert('data sent!');
@@ -228,6 +226,10 @@
 		}
 
 		mymap.on('click', onMapClick);
+
+		socket.on('fetch_events', function (res) {
+			console.log(res);
+		});
 
 
 	}
