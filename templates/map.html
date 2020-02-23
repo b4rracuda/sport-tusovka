@@ -116,7 +116,7 @@
 		$('#findevents').click(function(){
 			var getterdata = $('#date_created').val();
 			var socket = io.connect('https://' + document.domain + ':' + location.port);
-			socket.emit('fetch_events', getter, function(res){
+			socket.emit('fetch_events', getterdata, function(res){
 				console.log(res);
 				alert('data sent!');
 			});
