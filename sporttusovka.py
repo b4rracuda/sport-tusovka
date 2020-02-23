@@ -123,12 +123,14 @@ def register(data_from_google):
 
 @socketio.on('create_event')
 def create_event(event_details):
+    print(event_details)
     if Event.query.filter_by(startLat=event_details['startLat']).first() and Event.query.filter_by(startLon=event_details['startLon']).first() and Event.query.filter_by(datetime=event_details['datetime']).first():
         emit('event_response', 'exists')
     else:
         creator = Users.query.filter_by(email=event_details['email']).first()
+        date = event_details['datetime']
         new_event = Event(
-            datetime=event_details['datetime'],
+            datetime=date,
             startLat=event_details['startLat'],
             length=event_details['length'],
             startLon=event_details['startLon'],
