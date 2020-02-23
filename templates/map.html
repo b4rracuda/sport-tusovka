@@ -169,17 +169,7 @@
 
 
 		var popup = L.popup();
-		function onMapClick(e) {
-			mymap.removeLayer('testlayer');
-			popup
-				.setLatLng(e.latlng)
-				.setContent("Координати: " + e.latlng.toString()+"<br><span class='createpops' id='create-right-bar-open' onclick='openRightBarCreate("+e.latlng.lat+","+e.latlng.lng+");'>Створити тусовку?</span>")
-				.openOn(mymap);
 
-
-		}
-
-		mymap.on('click', onMapClick);
 
 		$('#createanevent').click(function(){
 			var eventdata = {
@@ -197,13 +187,14 @@
 				alert('data sent!');
 			});
 		});
+		var testlayer = '';
 		$('#findevents').click(function(){
 			var getterdata = $('#date_created').val();
 
 			var littleton = L.marker([50.416399, 30.653744]).bindPopup('This is Littleton, CO.'),
 			    denver    = L.marker([50.397263, 30.635548]).bindPopup('This is Denver, CO.');
 
-			var testlayer =  L.layerGroup([littleton, denver]).addTo(mymap);
+			 testlayer =  L.layerGroup([littleton, denver]).addTo(mymap);
 			
 
 			var socket = io.connect('https://' + document.domain + ':' + location.port);
@@ -212,6 +203,18 @@
 				alert('data sent!');
 			});
 		});
+
+		function onMapClick(e) {
+			mymap.removeLayer(testlayer);
+			popup
+				.setLatLng(e.latlng)
+				.setContent("Координати: " + e.latlng.toString()+"<br><span class='createpops' id='create-right-bar-open' onclick='openRightBarCreate("+e.latlng.lat+","+e.latlng.lng+");'>Створити тусовку?</span>")
+				.openOn(mymap);
+
+
+		}
+
+		mymap.on('click', onMapClick);
 
 
 	}
