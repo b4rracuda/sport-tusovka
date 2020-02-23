@@ -57,12 +57,12 @@
 					<div></div>
 				</a>
 
-				<div class="mt-5 pt-5">
-					<div>
+				<div class="mt-5 pt-5 d-flex flex-column">
+					<div class="mb-2">
 						<label for="event-date">Дата: </label>
 						<input type="date" name="event-date">
 					</div>
-					<div>
+					<div class="mb-2">
 						<label>Район: </label>
 						<select>
 							<option value="region1">Region1</option>
@@ -71,9 +71,14 @@
 							<option value="region4">Region4</option>
 						</select>
 					</div>
+					<div class="mb-2">
+						<label>Кілометраж: </label>
+						<input style="width: 100px;" type="number">
+						<label> км</label>
+					</div>
 					<div>
-						<label for="birthday">Район: </label>
-						<input type="date" name="event-date">
+						<label>Складність: </label>
+						<input type="range" min="1" max="5"/>
 					</div>
 				</div>
 
@@ -87,23 +92,19 @@
 					<div></div>
 				</a>
 
-				<div class="mt-5 pt-5">
-					<div>
+				<div class="mt-5 pt-5 d-flex flex-column">
+					<div class="mb-2">
 						<label for="event-date">Дата: </label>
-						<input type="date" name="event-date">
+						<input type="datetime-local" name="event-date">
+					</div>
+					<div class="mb-2">
+						<label>Кілометраж: </label>
+						<input style="width: 100px;" type="number">
+						<label> км</label>
 					</div>
 					<div>
-						<label>Район: </label>
-						<select>
-							<option value="region1">Region1</option>
-							<option value="region2">Region2</option>
-							<option value="region3">Region3</option>
-							<option value="region4">Region4</option>
-						</select>
-					</div>
-					<div>
-						<label for="birthday">Район: </label>
-						<input type="date" name="event-date">
+						<label>Складність: </label>
+						<input type="range" min="1" max="5"/>
 					</div>
 				</div>
 

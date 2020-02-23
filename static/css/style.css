@@ -175,69 +175,98 @@ button:hover {
 		transition: .4s;
 	}
 
-	.close-right-bar {
-		position: absolute;
-		right: 16px;
-		top: 16px;
-		width: 40px;
-		height: 40px;
-		cursor: pointer;
-	}
+	/**CLOSE BTN STARTS**/
+		.close-right-bar {
+			position: absolute;
+			right: 16px;
+			top: 16px;
+			width: 40px;
+			height: 40px;
+			cursor: pointer;
+		}
 
-	.close-right-bar div {
-		position: absolute;
-		top: 19px;
-		left: 5px;
-		width: 30px;
-		height: 2px;
-		background-color: #785589;
-	}
+		.close-right-bar div {
+			position: absolute;
+			top: 19px;
+			left: 5px;
+			width: 30px;
+			height: 2px;
+			background-color: #785589;
+		}
 
-	.close-right-bar div:nth-of-type(1) {
-		transform: rotate(45deg);
-	}
+		.close-right-bar div:nth-of-type(1) {
+			transform: rotate(45deg);
+		}
 
-	.close-right-bar div:nth-of-type(2) {
-		transform: rotate(-45deg);
-	}
+		.close-right-bar div:nth-of-type(2) {
+			transform: rotate(-45deg);
+		}
+	/**CLOSE BTN ENDS**/
 
+	/**INPUT DATE STARTS**/
+		/* Removes the clear button from date inputs */
+		input[type="datetime-local"]::-webkit-clear-button {
+		    display: none;
+		}
 
-	/* Removes the clear button from date inputs */
-	input[type="date"]::-webkit-clear-button {
-	    display: none;
-	}
+		/* Removes the spin button */
+		input[type="datetime-local"]::-webkit-inner-spin-button { 
+		    display: none;
+		}
 
-	/* Removes the spin button */
-	input[type="date"]::-webkit-inner-spin-button { 
-	    display: none;
-	}
+		/* Always display the drop down caret */
+		input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+		    color: #785589;
+		}
 
-	/* Always display the drop down caret */
-	input[type="date"]::-webkit-calendar-picker-indicator {
-	    color: #785589;
-	}
+		/* A few custom styles for date inputs */
+		input[type="datetime-local"] {
+		    appearance: none;
+		    -webkit-appearance: none;
+		    color: #785589;
+		    border: none;
+		    border-bottom: 1px solid #785589;
+		    background: #CDC1D4;
+		    font-size: 18px;
+		    padding: 5px;
+		    padding-bottom: 0px;
+		    display: inline-block !important;
+		    visibility: visible !important;
+		}
 
-	/* A few custom styles for date inputs */
-	input[type="date"] {
-	    appearance: none;
-	    -webkit-appearance: none;
-	    color: #785589;
-	    border: none;
-	    border-bottom: 1px solid #785589;
-	    background: #CDC1D4;
-	    font-size: 18px;
-	    padding: 5px;
-	    padding-bottom: 0px;
-	    display: inline-block !important;
-	    visibility: visible !important;
-	}
+		input[type="datetime-local"], focus {
+		    color: #785589;
+		    box-shadow: none;
+		    -webkit-box-shadow: none;
+		    -moz-box-shadow: none;
+		}
+	/** INPUT DATE ENDS**/
 
-	input[type="date"], focus {
-	    color: #785589;
-	    box-shadow: none;
-	    -webkit-box-shadow: none;
-	    -moz-box-shadow: none;
-	}
+	/**SELECT STARTS**/
+		select {
+		  padding: 0px 16px;
+		  font-size: 18px;
+		  border: none;
+		  color: #785589;
+		  border-bottom: 1px solid #785589;
+		  background-color: #CDC1D4;
+		  height: 34px;
+		  -webkit-appearance: none;
+		  -moz-appearance: none;
+		  appearance: none;
+		}
+	/**SELECT ENDS**/
+
+	/**INPUT NUMBER STARTS**/
+		input[type="number"] {
+			background-color: #CDC1D4;
+			padding: 0px 16px;
+			border: none;
+			color: #785589;
+			border-bottom: 1px solid #785589;
+			font-size: 18px;
+		}
+	/**INPUT NUMBER ENDS**/
 
 	label {
 		font-size: 20px;
