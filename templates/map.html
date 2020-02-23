@@ -210,7 +210,7 @@
 				console.log(res);
 				var points = JSON.parse(res);
 
-				points.forEach(myFunction);
+				points.events.forEach(myFunction);
 				var markerdata = [];
 				function myFunction(item, index) {
 					markerdata.push(L.marker([item.lat, item.lng]).bindPopup("<p>Свторено: Целузо Наталія</p><p>Коли? <b>23.02.2020, 17:30</b></p><p>Дистанція: ~3.2 km</p><p>Темп: 3/5</p>"));
