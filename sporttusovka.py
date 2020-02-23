@@ -127,13 +127,13 @@ def create_event(event_details):
     date = event_details['datetime']
     new_event = Event(
         datetime=20200223,
-        startlat=event_details['startLat'],
-        startlon=event_details['startLon'],
-        finishlon=event_details['finishLon'],
-        finishlat=event_details['finishLat'],
+        startlat=float(event_details['startLat']),
+        startlon=float(event_details['startLon']),
+        finishlon=None,
+        finishlat=None,
         length=event_details['length'],
-        level=event_details['level'],
-        creatorID=event_details['creatorID']
+        level=int(event_details['level']),
+        creatorID=int(event_details['creatorID'])
         )
     db.session.add(new_event)
     db.session.commit()
