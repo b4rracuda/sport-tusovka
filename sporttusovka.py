@@ -105,6 +105,10 @@ def splash():
 def map():
     return render_template('map.html')
 
+@app.route('/account')
+def account():
+    return render_template('account.html')
+
 @socketio.on('login')
 def register(data_from_google):
     if Users.query.filter_by(email=data_from_google['email']).first():
@@ -139,13 +143,17 @@ def create_event(event_details):
     emit('event_response', 'created_event')
 
 @socketio.on('fetch_events')
-def fetch_events(datetime):
-    datetime = int(datetime.replace('-', ''))
-    events_at_date = Event.query.filter_by(datetime=datetime).all()
+def fetch_events(filters):
+    datetime = int(filters['datetime'].replace('-', ''))
+    events_at_date = Event.query.filter(db.event.datetime==datetime,
+        db.event.length<=int(filters['length']),
+        db.event.level<=int(filters['level'])
+        ).all()
     events_at_date_list = []
     for each in events_at_date:
         events_at_date_list.append(each.serialize())
-    emit('fetch_events', events_at_date_list)
+    print("[INFO] ", json.dumps(events_at_date_list))
+    emit('fetch_events', json.dumps(events_at_date_list))
 
 @app.route('/easter_egg')
 def easter_egg():

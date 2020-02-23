@@ -38,7 +38,7 @@
 					<label> км</label>
 				</div>
 				<div>
-					<label>Складність: </label>
+					<label>Складність, до: </label>
 					<input type="range" min="1" max="5" id="level_upto" />
 				</div>
 				
@@ -137,6 +137,14 @@
 	function initter(position){
 		var defLat =51.505;
 		var defLong = -0.09;
+		var redIcon = new L.Icon({
+		  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+		  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+		  iconSize: [25, 41],
+		  iconAnchor: [12, 41],
+		  popupAnchor: [1, -34],
+		  shadowSize: [41, 41]
+		});
 		defLat= position.coords.latitude;
 		defLong = position.coords.longitude;
 
@@ -152,7 +160,7 @@
 			zoomOffset: -1
 		}).addTo(mymap);
 
-		L.marker([defLat, defLong]).addTo(mymap)
+		L.marker([defLat, defLong], {icon: redIcon}).addTo(mymap)
 			.bindPopup("<b>Це твоя локація</b>").openPopup();
 
 		// L.circle([51.508, -0.11], 500, {
@@ -191,6 +199,12 @@
 		$('#findevents').click(function(){
 			var getterdata = $('#date_created').val();
 
+			getterdata = JSON.stringify({
+				'datetime': $('#date_created').val(),
+				'length': $('#distance_upto').val(),
+				'level': $('#level_upto').val()
+			});
+
 			var littleton = L.marker([50.416399, 30.653744]).bindPopup('This is Littleton, CO.'),
 			    denver    = L.marker([50.397263, 30.635548]).bindPopup('This is Denver, CO.');
 
@@ -205,7 +219,10 @@
 		});
 
 		function onMapClick(e) {
-			mymap.removeLayer(testlayer);
+			if (mymap.hasLayer(testlayer)) {
+				mymap.removeLayer(testlayer);
+			}
+			
 			popup
 				.setLatLng(e.latlng)
 				.setContent("Координати: " + e.latlng.toString()+"<br><span class='createpops' id='create-right-bar-open' onclick='openRightBarCreate("+e.latlng.lat+","+e.latlng.lng+");'>Створити тусовку?</span>")
