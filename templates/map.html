@@ -210,12 +210,7 @@
 			var socket = io.connect('https://' + document.domain + ':' + location.port);
 			socket.emit('fetch_events', getterdata, function(res){
 				console.log(res);
-				alert('data sent!');
 			});
-			socket.on('fetch_events', function (res) {
-				console.log(res);
-			});
-
 		});
 
 		function onMapClick(e) {
