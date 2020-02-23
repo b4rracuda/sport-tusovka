@@ -132,7 +132,7 @@ def create_event(event_details):
         finishlat=None,
         length=event_details['length'],
         level=int(event_details['level']),
-        creatorID=int(event_details['creatorID'])
+        creatorid=int(event_details['creatorID'])
         )
     db.session.add(new_event)
     db.session.commit()
