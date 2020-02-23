@@ -145,9 +145,9 @@ def create_event(event_details):
 @socketio.on('fetch_events')
 def fetch_events(filters):
     datetime = int(filters['datetime'].replace('-', ''))
-    events_at_date = Event.query.filter(db.event.datetime==datetime,
-        db.event.length<=int(filters['length']),
-        db.event.level<=int(filters['level'])
+    events_at_date = Event.query.filter(Event.datetime==datetime,
+        Event.length<=int(filters['length']),
+        Event.level<=int(filters['level'])
         ).all()
     events_at_date_list = []
     for each in events_at_date:

@@ -117,10 +117,6 @@ button:hover {
 		transition: .4s;
 	}
 
-	.navbar-nav li:hover a {
-		color: #785589 !important;
-	}
-
 	.navbar-icon {
 		width: 60px;
 		height: 60px;
@@ -141,11 +137,14 @@ button:hover {
 		color: white !important;
 		background-color: rgba(0,0,0,0);
 		border: none;
+		border-bottom: 2px solid rgba(0,0,0,0);
+		border-radius: 0px;
 	}
 
 	.nav-link:hover {
-		color: #785589 !important;
 		box-shadow: none;
+		border-radius: 0px;
+		border-bottom: 2px solid white;
 	}
 /** NAVBAR ENDS**/
 
