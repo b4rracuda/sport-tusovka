@@ -123,8 +123,9 @@ def register(data_from_google):
 
 @socketio.on('create_event')
 def create_event(event_details):
+    date = int(event_details['datetime'].replace('-', ''))
     new_event = Event(
-        datetime=20200223,
+        datetime=date,
         startlat=float(event_details['startlat']),
         startlon=float(event_details['startlon']),
         finishlon=None,
@@ -139,6 +140,7 @@ def create_event(event_details):
 
 @socketio.on('fetch_events')
 def fetch_events(datetime):
+    datetime = int(datetime.replace('-', ''))
     events_at_date=Event.query.filter_by(datetime=datetime)
     events_at_date = json.dumps(events_at_date)
     emit('fetch_events', events_at_date)
