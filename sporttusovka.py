@@ -155,6 +155,7 @@ def fetch_events(filters):
     print("[INFO] ", '{"events":'+json.dumps(events_at_date_list)+'}')
     response = '{"events":'+json.dumps(events_at_date_list)+'}'
     emit('fetch_events', str(response) )
+    return str(response)
 
 @app.route('/easter_egg')
 def easter_egg():
