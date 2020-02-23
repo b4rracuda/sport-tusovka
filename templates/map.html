@@ -203,19 +203,23 @@
 
 			var littleton = L.marker([50.416399, 30.653744]).bindPopup("<p>Свторено: Целузо Наталія</p><p>Коли? <b>23.02.2020, 17:30</b></p><p>Дистанція: ~3.2 km</p><p>Темп: 3/5</p>"),
 			    denver    = L.marker([50.397263, 30.635548]).bindPopup('This is Denver, CO.');
-
-			 testlayer =  L.layerGroup([littleton, denver]).addTo(mymap);
 			
 
 			var socket = io.connect('https://' + document.domain + ':' + location.port);
-			socket.emit('fetch_events', getterdata, function(res){
+				socket.emit('fetch_events', getterdata, function(res){
 				console.log(res);
-				alert('data sent!');
-			});
-			socket.on('fetch_events', function (res) {
-				console.log(res);
-			});
+				var points = JSON.parse(res.events);
 
+				points.forEach(myFunction);
+				var markerdata = [];
+				function myFunction(item, index) {
+					markerdata.push(L.marker([item.lat, item.lng]).bindPopup("<p>Свторено: Целузо Наталія</p><p>Коли? <b>23.02.2020, 17:30</b></p><p>Дистанція: ~3.2 km</p><p>Темп: 3/5</p>"));
+				}
+
+				testlayer = L.layerGroup(markerdata).addTo(mymap);
+
+
+			});
 		});
 
 		function onMapClick(e) {
