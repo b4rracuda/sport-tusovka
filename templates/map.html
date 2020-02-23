@@ -61,35 +61,47 @@
 		<div class="mt-5 pt-5">
 			<div>
 				<label for="event-date">Дата: </label>
-				<input type="date" name="event-date">
+				<input type="date" name="event-date" id="creation_date">
+				<input type="hidden" id="startlat" value="">
+				<input type="hidden" id="startlon" value="">
+				<input type="hidden" id="finishlat" value="">
+				<input type="hidden" id="finishlon" value="">
+
 			</div>
-			<div>
-				<label>Район: </label>
-				<select>
-					<option value="region1">Region1</option>
-					<option value="region2">Region2</option>
-					<option value="region3">Region3</option>
-					<option value="region4">Region4</option>
-				</select>
-			</div>
-			<div>
-				<label for="birthday">Район: </label>
-				<input type="date" name="event-date">
-			</div>
+			
+			
 		</div>
 
 
-		<a href="#"><button class="mx-3 button-outline">Створити</button></a>
+		<a href="#"><button class="mx-3 button-outline" id="createanevent">Створити</button></a>
 	</div>
 
 </div>
 
 <script>
-	function openRightBarCreate(){
+	function openRightBarCreate(lat, lng){
 		$("#create-right-bar").css("right", "0");
 		$("#find-right-bar").css("right", -$("#create-right-bar").width());
+		$('#startlat').val(lat);
+		$('#startlon').val(lng);
 	}
 	$(document).ready(function() {
+		$('#createanevent').click(function(){
+			var eventdata = {
+				'datetime': $('#creation_date').val(),
+				'startLat': $('#startlat').val(),
+				'startLon': $('#startlon').val(),
+				'finishLat': null,
+				'finishLon':null,
+				'length':1,
+				'level':1,
+				'creatorID':1
+			};
+			var socket = io.connect('https://' + document.domain + ':' + location.port);
+			socket.emit('create_event', eventdata, function(res){
+				alert('data sent!');
+			});
+		});
 		$(".close-right-bar").click(function() {
 			$(this).parent().css("right", -$("#create-right-bar").width());
 		});
@@ -100,26 +112,7 @@
 		});
 	});
 </script>
-
-<div id="mapid" style="width: 100vw; height: calc(100vh - 70px);margin-top: 70px;"></div>
-<div id="create-popup">
-	<span class="times">X</span>
-	<span class="start">Старт:</span>
-	<span class="startloc"></span>
-	<span class="km">Дистанція: <input type="number" value="1" />км</span>
-	<span class="date">Дата: <input type="date" /></span>
-	<span class="time"><input type="text" id="time" placeholder="Time"></span>
-
-</div>
 <style type="text/css">
-	#create-popup{
-		display: none;
-		flex-direction: column;
-		align-items: flex-start;
-		background: #F2EFF4;
-		max-width: 274px;
-		padding: 20px;
-	}
 	.createpops{
 		display: block;
 		padding: 6px 10px;
@@ -133,7 +126,15 @@
 		cursor: pointer;
 
 	}
+	#create-right-bar, #find-right-bar-open{
+		z-index: 1000;
+	}
+
 </style>
+
+<div id="mapid" style="width: 100vw; height: calc(100vh - 70px);margin-top: 70px;"></div>
+
+
 <script>
 
 	function getLocation() {
@@ -180,18 +181,12 @@
 
 
 		var popup = L.popup();
-		var socket = io.connect('https://' + document.domain + ':' + location.port);
 		function onMapClick(e) {
-			var eventdata = {
-
-			};
 			popup
 				.setLatLng(e.latlng)
-				.setContent("Координати: " + e.latlng.toString()+"<br><span class='createpops' id='create-right-bar-open' onclick='openRightBarCreate();'>Створити тусовку?</span>")
+				.setContent("Координати: " + e.latlng.toString()+"<br><span class='createpops' id='create-right-bar-open' onclick='openRightBarCreate("+e.latlng.lat+","+e.latlng.lng+");'>Створити тусовку?</span>")
 				.openOn(mymap);
-				socket.emit('create_event', eventdata, function(res){
-					alert('data sent!');
-				});
+
 
 		}
 
