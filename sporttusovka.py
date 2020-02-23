@@ -152,8 +152,8 @@ def fetch_events(filters):
     events_at_date_list = []
     for each in events_at_date:
         events_at_date_list.append(each.serialize())
-    print("[INFO] ", json.dumps(events_at_date_list))
-    response = "{"+json.dumps(events_at_date_list)+"}"
+    print("[INFO] ", '{"events":'+json.dumps(events_at_date_list)+'}')
+    response = '{"events":'+json.dumps(events_at_date_list)+'}'
     emit('fetch_events', response )
 
 @app.route('/easter_egg')
