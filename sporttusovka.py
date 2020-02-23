@@ -62,23 +62,23 @@ class Users(db.Model):
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     datetime = db.Column(db.Integer)
-    startLat = db.Column(db.Float)
-    startLon = db.Column(db.Float)
-    finishLat = db.Column(db.Float)
-    finishLon = db.Column(db.Float)
+    startlat = db.Column(db.Float)
+    startlon = db.Column(db.Float)
+    finishlat = db.Column(db.Float)
+    finishlon = db.Column(db.Float)
     level = db.Column(db.Integer)
     length = db.Column(db.Integer)
-    creatorID = db.Column(db.Integer)
+    creatorid = db.Column(db.Integer)
 
-    def __init__(self, datetime , startLat, length, startLon, finishLon, finishLat, level, creatorID):
+    def __init__(self, datetime , startlat, length, startlon, finishlon, finishlat, level, creatorid):
         self.datetime = datetime
-        self.startLat = startLat
-        self.startLon = startLon
-        self.finishLat = finishLat
-        self.finishLon = finishLon
+        self.startlat = startlat
+        self.startlon = startlon
+        self.finishlat = finishlat
+        self.finishlon = finishlon
         self.level = level
         self.length = length
-        self.creatorID = creatorID
+        self.creatorid = creatorid 
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
@@ -87,12 +87,12 @@ class Event(db.Model):
         return {
             'id': self.id,
             'datetime' : datetime,
-            'startLat' : startLat,
-            'startLon' : startLon,
-            'finishLat' : finishLat,
-            'finishLon' : finishLon,
+            'startlat' : startlat,
+            'startlon' : startlon,
+            'finishlat' : finishlat,
+            'finishlon' : finishlon,
             'level' : level,
-            'creatorID' : creatorID
+            'creatorid' : creatorid
         }
 
 ### Models
@@ -123,20 +123,19 @@ def register(data_from_google):
 
 @socketio.on('create_event')
 def create_event(event_details):
-    print(float(event_details['startLat']))
-    # new_event = Event(
-    #     datetime=20200223,
-    #     startlat=float(event_details['startLat']),
-    #     startlon=float(event_details['startLon']),
-    #     finishlon=None,
-    #     finishlat=None,
-    #     length=event_details['length'],
-    #     level=int(event_details['level']),
-    #     creatorid=int(event_details['creatorID'])
-    #     )
-    # db.session.add(new_event)
-    # db.session.commit()
-    emit('event_response', '[fake] created_event')
+    new_event = Event(
+        datetime=20200223,
+        startlat=float(event_details['startlat']),
+        startlon=float(event_details['startlon']),
+        finishlon=None,
+        finishlat=None,
+        length=int(event_details['length']),
+        level=int(event_details['level']),
+        creatorid=int(event_details['creatorid'])
+        )
+    db.session.add(new_event)
+    db.session.commit()
+    emit('event_response', 'created_event')
 
 @socketio.on('fetch_events')
 def fetch_events(datetime):
