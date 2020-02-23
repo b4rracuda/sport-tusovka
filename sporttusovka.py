@@ -146,8 +146,8 @@ def create_event(event_details):
 def fetch_events(filters):
     datetime = int(filters['datetime'].replace('-', ''))
     events_at_date = Event.query.filter(Event.datetime==datetime,
-        db.event.length<=int(filters['length']),
-        db.event.level<=int(filters['level'])
+        Event.length<=int(filters['length']),
+        Event.level<=int(filters['level'])
         ).all()
     events_at_date_list = []
     for each in events_at_date:
