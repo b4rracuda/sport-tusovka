@@ -80,7 +80,7 @@
 
 <script>
 	function openRightBarCreate(lat, lng){
-		$("#create-right-bar").css("right", "0");
+		$("#create-right-bar").css({right:"0",z-index:1000});
 		$("#find-right-bar").css("right", -$("#create-right-bar").width());
 		$('#startlat').val(lat);
 		$('#startlon').val(lng);
@@ -125,9 +125,6 @@
 	.createpops:hover{
 		cursor: pointer;
 
-	}
-	#create-right-bar, #find-right-bar-open{
-		z-index: 1000;
 	}
 
 </style>
