@@ -199,6 +199,12 @@
 		$('#findevents').click(function(){
 			var getterdata = $('#date_created').val();
 
+			getterdata = JSON.stringify({
+				'datetime': $('#date_created').val(),
+				'length': $('#distance_upto').val(),
+				'level': $('#level_upto').val()
+			});
+
 			var littleton = L.marker([50.416399, 30.653744]).bindPopup('This is Littleton, CO.'),
 			    denver    = L.marker([50.397263, 30.635548]).bindPopup('This is Denver, CO.');
 
