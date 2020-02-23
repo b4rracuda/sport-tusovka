@@ -142,6 +142,7 @@ def create_event(event_details):
 def fetch_events(datetime):
     datetime = int(datetime.replace('-', ''))
     events_at_date = Event.query.filter_by(datetime=datetime).all()
+    events_at_date_list = []
     for each in events_at_date:
         events_at_date_list.append(each.serialize())
     emit('fetch_events', events_at_date_list)
