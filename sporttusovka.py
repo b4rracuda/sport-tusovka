@@ -142,7 +142,6 @@ def create_event(event_details):
 def fetch_events(datetime):
     datetime = int(datetime.replace('-', ''))
     events_at_date=Event.query.filter_by(datetime=datetime)
-    events_at_date = json.dumps(events_at_date)
     emit('fetch_events', events_at_date)
 
 @app.route('/easter_egg')
