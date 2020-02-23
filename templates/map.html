@@ -9,7 +9,7 @@
 	</a>
 	<ul class="navbar-nav d-flex flex-row">
 		<li class="nav-item">
-			<a class="nav-link" href="#">Find</a>
+			<a class="nav-link" onclick="function(e){e.preventDefault();openRightBarFind();" href="#">Find</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link" href="#">Create</a>
@@ -94,6 +94,10 @@
 		$('#startlat').val(lat);
 		$('#startlon').val(lng);
 	}
+	function openRightBarFind(){
+		$("#find-right-bar").css("right", "0");
+		$("#create-right-bar").css("right", -$("#create-right-bar").width());
+	}
 	$(document).ready(function() {
 		$('#createanevent').click(function(){
 			var eventdata = {
@@ -113,11 +117,6 @@
 		});
 		$(".close-right-bar").click(function() {
 			$(this).parent().css("right", -$("#create-right-bar").width());
-		});
-
-		$("#find-right-bar-open").click(function() {
-			$("#find-right-bar").css("right", "0");
-			$("#create-right-bar").css("right", -$("#create-right-bar").width());
 		});
 	});
 </script>
