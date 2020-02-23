@@ -124,19 +124,19 @@ def register(data_from_google):
 @socketio.on('create_event')
 def create_event(event_details):
     print(float(event_details['startLat']))
-    new_event = Event(
-        datetime=20200223,
-        startlat=float(event_details['startLat']),
-        startlon=float(event_details['startLon']),
-        finishlon=None,
-        finishlat=None,
-        length=event_details['length'],
-        level=int(event_details['level']),
-        creatorid=int(event_details['creatorID'])
-        )
-    db.session.add(new_event)
-    db.session.commit()
-    emit('event_response', 'created_event')
+    # new_event = Event(
+    #     datetime=20200223,
+    #     startlat=float(event_details['startLat']),
+    #     startlon=float(event_details['startLon']),
+    #     finishlon=None,
+    #     finishlat=None,
+    #     length=event_details['length'],
+    #     level=int(event_details['level']),
+    #     creatorid=int(event_details['creatorID'])
+    #     )
+    # db.session.add(new_event)
+    # db.session.commit()
+    emit('event_response', '[fake] created_event')
 
 @socketio.on('fetch_events')
 def fetch_events(datetime):
