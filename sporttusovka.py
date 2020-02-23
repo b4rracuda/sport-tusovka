@@ -126,6 +126,7 @@ def create_event(event_details):
     if Event.query.filter_by(startLat=event_details['startLat']).first() and Event.query.filter_by(startLon=event_details['startLon']).first() and Event.query.filter_by(datetime=event_details['datetime']).first():
         emit('event_response', 'exists')
     else:
+        creator = Users.query.filter_by(email=event_details['email']).first()
         new_event = Event(
             datetime=event_details['datetime'],
             startLat=event_details['startLat'],
@@ -134,7 +135,7 @@ def create_event(event_details):
             finishLon=event_details['finishLon'],
             finishLat=event_details['finishLat'],
             level=event_details['level'],
-            creatorID=event_details['creatorID']
+            creatorID=creator.id
             )
         db.session.add(new_event)
         db.session.commit()
