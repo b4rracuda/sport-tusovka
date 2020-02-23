@@ -97,36 +97,7 @@
 		$("#create-right-bar").css("right", -$("#create-right-bar").width());
 	}
 	$(document).ready(function() {
-		$('#createanevent').click(function(){
-			var eventdata = {
-				'datetime': $('#creation_date').val(),
-				'startlat': $('#startlat').val(),
-				'startlon': $('#startlon').val(),
-				'finishlat': null,
-				'finishon':null,
-				'length':$('#create_distance').val(),
-				'level':$('#create_level').val(),
-				'creatorid':1
-			};
-			var socket = io.connect('https://' + document.domain + ':' + location.port);
-			socket.emit('create_event', eventdata, function(res){
-				alert('data sent!');
-			});
-		});
-		$('#findevents').click(function(){
-			var getterdata = $('#date_created').val();
 
-			var littleton = L.marker([50.416399, 30.653744]).bindPopup('This is Littleton, CO.'),
-			    denver    = L.marker([50.397263, 30.635548]).bindPopup('This is Denver, CO.');
-
-			var testlayer =  L.layerGroup([littleton, denver]);
-
-			var socket = io.connect('https://' + document.domain + ':' + location.port);
-			socket.emit('fetch_events', getterdata, function(res){
-				console.log(res);
-				alert('data sent!');
-			});
-		});
 		$(".close-right-bar").click(function() {
 			$(this).parent().css("right", -$("#create-right-bar").width());
 		});
@@ -208,6 +179,38 @@
 		}
 
 		mymap.on('click', onMapClick);
+
+		$('#createanevent').click(function(){
+			var eventdata = {
+				'datetime': $('#creation_date').val(),
+				'startlat': $('#startlat').val(),
+				'startlon': $('#startlon').val(),
+				'finishlat': null,
+				'finishon':null,
+				'length':$('#create_distance').val(),
+				'level':$('#create_level').val(),
+				'creatorid':1
+			};
+			var socket = io.connect('https://' + document.domain + ':' + location.port);
+			socket.emit('create_event', eventdata, function(res){
+				alert('data sent!');
+			});
+		});
+		$('#findevents').click(function(){
+			var getterdata = $('#date_created').val();
+
+			var littleton = L.marker([50.416399, 30.653744]).bindPopup('This is Littleton, CO.'),
+			    denver    = L.marker([50.397263, 30.635548]).bindPopup('This is Denver, CO.');
+
+			var testlayer =  L.layerGroup([littleton, denver]).addTo(mymap);
+			
+
+			var socket = io.connect('https://' + document.domain + ':' + location.port);
+			socket.emit('fetch_events', getterdata, function(res){
+				console.log(res);
+				alert('data sent!');
+			});
+		});
 
 
 	}
