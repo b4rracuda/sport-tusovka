@@ -102,13 +102,13 @@
 		$('#createanevent').click(function(){
 			var eventdata = {
 				'datetime': $('#creation_date').val(),
-				'startLat': $('#startlat').val(),
-				'startLon': $('#startlon').val(),
-				'finishLat': null,
-				'finishLon':null,
+				'startlat': $('#startlat').val(),
+				'startlon': $('#startlon').val(),
+				'finishlat': null,
+				'finishon':null,
 				'length':1,
 				'level':1,
-				'creatorID':1
+				'creatorid':1
 			};
 			var socket = io.connect('https://' + document.domain + ':' + location.port);
 			socket.emit('create_event', eventdata, function(res){
