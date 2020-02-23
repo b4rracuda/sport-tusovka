@@ -116,7 +116,10 @@
 		$('#findevents').click(function(){
 			var getterdata = $('#date_created').val();
 
-			var testlayer L.layerGroup([L.marker([50.416399, 30.653744]).bindPopup('This is Littleton, CO.'), L.marker([50.397263, 30.635548]).bindPopup('This is Littleton, CO.') ]);
+			var littleton = L.marker([50.416399, 30.653744]).bindPopup('This is Littleton, CO.'),
+			    denver    = L.marker([50.397263, 30.635548]).bindPopup('This is Denver, CO.');
+
+			var testlayer =  L.layerGroup([littleton, denver]);
 
 			var socket = io.connect('https://' + document.domain + ':' + location.port);
 			socket.emit('fetch_events', getterdata, function(res){
