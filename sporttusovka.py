@@ -143,8 +143,8 @@ def fetch_events(datetime):
     datetime = int(datetime.replace('-', ''))
     events_at_date = Event.query.filter_by(datetime=datetime).all()
     for each in events_at_date:
-        print(each.serialize())
-    emit('fetch_events', events_at_date)
+        events_at_date_list.append(each.serialize())
+    emit('fetch_events', events_at_date_list)
 
 @app.route('/easter_egg')
 def easter_egg():
