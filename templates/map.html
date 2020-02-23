@@ -9,10 +9,10 @@
 	</a>
 	<ul class="navbar-nav d-flex flex-row">
 		<li class="nav-item">
-			<button class="nav-link" onclick="openRightBarFind();" href="#">Знайти</button>
+			<button class="nav-link" onclick="openRightBarFind();" >Знайти</button>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="#">Створити</a>
+			<button class="nav-link" onclick="alert('Просто клікни по потрібному місцю на мапі!');" >Створити</button>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link" href="#">Ім'я Юзера</a>
@@ -170,9 +170,7 @@
 
 		var popup = L.popup();
 		function onMapClick(e) {
-			mymap.eachLayer(function (layer) {
-			    mymap.removeLayer(layer);
-			});
+			mymap.removeLayer('testlayer');
 			popup
 				.setLatLng(e.latlng)
 				.setContent("Координати: " + e.latlng.toString()+"<br><span class='createpops' id='create-right-bar-open' onclick='openRightBarCreate("+e.latlng.lat+","+e.latlng.lng+");'>Створити тусовку?</span>")
