@@ -95,7 +95,7 @@
 		$('#startlon').val(lng);
 	}
 	function openRightBarFind(){
-		$("#find-right-bar").css("right", "0");
+		$("#find-right-bar").css({'right':"0",'z-index':1000});
 		$("#create-right-bar").css("right", -$("#create-right-bar").width());
 	}
 	$(document).ready(function() {
