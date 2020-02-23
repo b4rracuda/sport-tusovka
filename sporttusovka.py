@@ -86,13 +86,13 @@ class Event(db.Model):
     def serialize(self):
         return {
             'id': self.id,
-            'datetime' : datetime,
-            'startlat' : startlat,
-            'startlon' : startlon,
-            'finishlat' : finishlat,
-            'finishlon' : finishlon,
-            'level' : level,
-            'creatorid' : creatorid
+            'datetime' : self.datetime,
+            'startlat' : self.startlat,
+            'startlon' : self.startlon,
+            'finishlat' : self.finishlat,
+            'finishlon' : self.finishlon,
+            'level' : self.level,
+            'creatorid' : self.creatorid
         }
 
 ### Models
