@@ -31,25 +31,22 @@
 		<div class="mt-5 pt-5">
 			<div>
 				<label for="event-date">Дата: </label>
-				<input type="date" name="event-date">
+				<input type="date" name="event-date" id="date_created">
+				<div class="mb-2">
+					<label>Кілометраж, до: </label>
+					<input style="width: 100px;" type="number" id="distance_upto" value="5">
+					<label> км</label>
+				</div>
+				<div>
+					<label>Складність: </label>
+					<input type="range" min="1" max="5" id="level_upto" />
+				</div>
+				
 			</div>
-			<div>
-				<label>Район: </label>
-				<select>
-					<option value="region1">Region1</option>
-					<option value="region2">Region2</option>
-					<option value="region3">Region3</option>
-					<option value="region4">Region4</option>
-				</select>
-			</div>
-			<div>
-				<label for="birthday">Район: </label>
-				<input type="date" name="event-date">
-			</div>
+			<button class="mx-3 button-outline" id="findevents">Знайти!</button>
+			
 		</div>
 
-
-		<a href="#"><button class="mx-3 button-outline">Знайти</button></a>
 	</div>
 
 	<div id="create-right-bar" class="right-bar d-flex flex-column align-items-center">
@@ -61,20 +58,21 @@
 		<div class="mt-5 pt-5">
 			<div>
 				<label for="event-date">Дата: </label>
-				<div class="mb-2">
-					<label>Кілометраж: </label>
-					<input style="width: 100px;" type="number">
-					<label> км</label>
-				</div>
-				<div>
-					<label>Складність: </label>
-					<input type="range" min="1" max="5"/>
-				</div>
 				<input type="date" name="event-date" id="creation_date">
 				<input type="hidden" id="startlat" value="">
 				<input type="hidden" id="startlon" value="">
 				<input type="hidden" id="finishlat" value="">
 				<input type="hidden" id="finishlon" value="">
+				<div class="mb-2">
+					<label>Кілометраж: </label>
+					<input style="width: 100px;" id="create_distance" type="number" value="1">
+					<label> км</label>
+				</div>
+				<div>
+					<label>Складність: </label>
+					<input type="range" id="create_level" min="1" value="3" max="5"/>
+				</div>
+				
 
 			</div>
 			
@@ -106,12 +104,20 @@
 				'startlon': $('#startlon').val(),
 				'finishlat': null,
 				'finishon':null,
-				'length':1,
-				'level':1,
+				'length':$('#create_distance').val(),
+				'level':$('#create_level').val(),
 				'creatorid':1
 			};
 			var socket = io.connect('https://' + document.domain + ':' + location.port);
 			socket.emit('create_event', eventdata, function(res){
+				alert('data sent!');
+			});
+		});
+		$('#findevents').click(function(){
+			var getterdata = $('#date_created').val();
+			var socket = io.connect('https://' + document.domain + ':' + location.port);
+			socket.emit('fetch_events', getter, function(res){
+				console.log(res);
 				alert('data sent!');
 			});
 		});
