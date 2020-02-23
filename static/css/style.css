@@ -64,7 +64,16 @@ button:hover {
 .main-logo {
 	width: 140px;
 	margin-bottom: 36px;
+	animation: pulse 2s infinite;
 }
+
+@keyframes pulse {
+  0% {opacity: 1;}
+  50% {opacity: .5;}
+  100% {opacity: 1;}
+}
+
+
 
 
 @media only screen and (max-width: 768px) {
@@ -126,6 +135,17 @@ button:hover {
 		.navbar-icon {
 			margin: 0px 8px !important;
 		}
+	}
+
+	.nav-link {
+		color: white !important;
+		background-color: rgba(0,0,0,0);
+		border: none;
+	}
+
+	.nav-link:hover {
+		color: #785589 !important;
+		box-shadow: none;
 	}
 /** NAVBAR ENDS**/
 
