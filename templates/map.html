@@ -201,7 +201,7 @@
 				'level': $('#level_upto').val()
 			};
 
-			var littleton = L.marker([50.416399, 30.653744]).bindPopup('This is Littleton, CO.'),
+			var littleton = L.marker([50.416399, 30.653744]).bindPopup("<p>Свторено: Целузо Наталія</p><p>Коли? <b>23.02.2020, 17:30</b></p><p>Дистанція: ~3.2 km</p><p>Темп: 3/5</p>"),
 			    denver    = L.marker([50.397263, 30.635548]).bindPopup('This is Denver, CO.');
 
 			 testlayer =  L.layerGroup([littleton, denver]).addTo(mymap);
