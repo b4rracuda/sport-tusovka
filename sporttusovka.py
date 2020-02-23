@@ -123,8 +123,7 @@ def register(data_from_google):
 
 @socketio.on('create_event')
 def create_event(event_details):
-    print(event_details)
-    date = event_details['datetime']
+    print(float(event_details['startLat']))
     new_event = Event(
         datetime=20200223,
         startlat=float(event_details['startLat']),
