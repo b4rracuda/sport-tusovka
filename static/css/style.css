@@ -1,0 +1,295 @@
+body {
+	font-family: Montserrat;
+	font-style: normal;
+	max-width: 100vw;
+	overflow-x: hidden;
+}
+
+.full-screen-height {
+	height: 100vh;
+}
+
+.background-img {
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+.blur-background {
+	position: absolute;
+	height: 100vh;
+	width: 100%;
+	top: 0;
+	left: 0;
+	background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0) ,rgba(255,255,255,.5), #ffffff);
+}
+
+h1 {
+	font-weight: 600;
+	font-size: 42px;
+	line-height: 51px;
+	color: #785589;
+}
+
+p {
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 20px;
+}
+
+button {
+	background: #785589;
+	border-radius: 25px;
+	border: 2px solid #785589;
+	padding: 8px 32px;
+	color: white;
+	cursor: pointer;
+	transition: .4s;
+}
+
+button:hover {
+	box-shadow: 2px 4px 16px #AAAAAA;
+}
+
+.button-outline {
+	background-color: white;
+	color: #785589;
+}
+
+.button-outline:hover {
+	background-color: #785589;
+	color: white;
+}
+
+.main-logo {
+	width: 140px;
+	margin-bottom: 36px;
+	animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {opacity: 1;}
+  50% {opacity: .5;}
+  100% {opacity: 1;}
+}
+
+
+
+
+@media only screen and (max-width: 768px) {
+	.full-screen-height {
+		height: 50vh !important;
+	}
+
+	.main-logo {
+		width: 80px !important;
+		margin-bottom: 0px !important;
+	}
+
+	.blur-background {
+		height: 30vh !important;
+		top: 28vh !important;
+		background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0) ,rgba(255,255,255,.7),rgba(255,255,255,1), #ffffff) !important;
+	}
+
+	.right-bar {
+		width: 100vw;
+		height: calc(100vh - 70px);
+		right: -100vw;
+	}
+}
+
+
+
+/** NAVBAR BEGINS **/
+	.nav-name {
+		margin-bottom: 0px;
+		padding: 0px 16px;
+		font-size: 24px;
+	}
+
+	.navbar-nav li {
+		padding: 0px 16px;
+	}
+
+	.navbar-nav li a {
+		color: white !important;
+		transition: .4s;
+	}
+
+	.navbar-icon {
+		width: 60px;
+		height: 60px;
+		margin: 0px 24px;
+	}
+
+	@media only screen and (max-width: 768px) {
+		.navbar-nav li {
+			padding: 0px 8px !important;
+		}
+
+		.navbar-icon {
+			margin: 0px 8px !important;
+		}
+	}
+
+	.nav-link {
+		color: white !important;
+		background-color: rgba(0,0,0,0);
+		border: none;
+		border-bottom: 2px solid rgba(0,0,0,0);
+		border-radius: 0px;
+		outline: none !important;
+	}
+
+	.nav-link:hover {
+		box-shadow: none;
+		border-radius: 0px;
+		border-bottom: 2px solid white;
+	}
+/** NAVBAR ENDS**/
+
+
+/** ACCOUNT PAGE STARTS**/
+	.account-container {
+		background-color: white;
+		box-shadow: 2px 4px 16px #AAAAAA;
+		min-height: 96vh;
+		margin-bottom: 4vh;
+		padding-top: 70px;
+	}
+
+	.account-img {
+		border-radius: 50%;
+		width: 200px;
+		height: 200px;
+	}
+
+	.info {
+		color: white;
+		padding: 16px 24px;
+		font-size: 30px;
+		background-color: #785589;
+		border-radius: 16px;
+	}
+
+	.social-icon {
+		width: 36px;
+		height: 36px;
+	}
+/** ACCOUNT PAGE ENDS
+
+/**RIGHT BAR STARTS**/
+	@media only screen and (min-width: 769px) {
+		.right-bar {
+			width: 25vw;
+			right: -25vw;
+		}
+	}
+
+	.right-bar {
+		position: absolute;
+		top: 70px;
+		background-color: #CDC1D4;
+		min-height: calc(100vh - 70px);
+		transition: .4s;
+	}
+
+	/**CLOSE BTN STARTS**/
+		.close-right-bar {
+			position: absolute;
+			right: 16px;
+			top: 16px;
+			width: 40px;
+			height: 40px;
+			cursor: pointer;
+		}
+
+		.close-right-bar div {
+			position: absolute;
+			top: 19px;
+			left: 5px;
+			width: 30px;
+			height: 2px;
+			background-color: #785589;
+		}
+
+		.close-right-bar div:nth-of-type(1) {
+			transform: rotate(45deg);
+		}
+
+		.close-right-bar div:nth-of-type(2) {
+			transform: rotate(-45deg);
+		}
+	/**CLOSE BTN ENDS**/
+
+	/**INPUT DATE STARTS**/
+		/* Removes the clear button from date inputs */
+		input[type="date"]::-webkit-clear-button {
+		    display: none;
+		}
+
+		/* Removes the spin button */
+		input[type="date"]::-webkit-inner-spin-button { 
+		    display: none;
+		}
+
+		/* Always display the drop down caret */
+		input[type="date"]::-webkit-calendar-picker-indicator {
+		    color: #785589;
+		}
+
+		/* A few custom styles for date inputs */
+		input[type="date"] {
+		    appearance: none;
+		    -webkit-appearance: none;
+		    color: #785589;
+		    border: none;
+		    border-bottom: 1px solid #785589;
+		    background: #CDC1D4;
+		    font-size: 18px;
+		    padding: 5px;
+		    padding-bottom: 0px;
+		    display: inline-block !important;
+		    visibility: visible !important;
+		}
+
+		input[type="date"], focus {
+		    color: #785589;
+		    box-shadow: none;
+		    -webkit-box-shadow: none;
+		    -moz-box-shadow: none;
+		}
+	/** INPUT DATE ENDS**/
+
+	/**SELECT STARTS**/
+		select {
+		  padding: 0px 16px;
+		  font-size: 18px;
+		  border: none;
+		  color: #785589;
+		  border-bottom: 1px solid #785589;
+		  background-color: #CDC1D4;
+		  height: 34px;
+		  -webkit-appearance: none;
+		  -moz-appearance: none;
+		  appearance: none;
+		}
+	/**SELECT ENDS**/
+
+	/**INPUT NUMBER STARTS**/
+		input[type="number"] {
+			background-color: #CDC1D4;
+			padding: 0px 16px;
+			border: none;
+			color: #785589;
+			border-bottom: 1px solid #785589;
+			font-size: 18px;
+		}
+	/**INPUT NUMBER ENDS**/
+
+	label {
+		font-size: 20px;
+		color: #785589;
+	}
+/**RIGHT BAR ENDS**/

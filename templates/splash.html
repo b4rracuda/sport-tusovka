@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row mx-0 px-0">
+	<div class="col-md-7 mx-0 px-0 col-12 full-screen-height background-img" style="background-image: url(img/main_run.jpg)">
+		<div class="blur-background px-0"></div>
+	</div>
+	<div class="col-md-5 col-12 mx-0 px-md-5 px-0 full-screen-height d-flex flex-column align-items-center justify-content-center">	
+		<img src="img/running1.svg" class="main-logo" />
+		<h1 class="d-md-block d-none">СпортТусовка</h1>
+		<p class="px-md-5 my-md-5 my-3 text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu ac tortor dignissim convallis aenean et. Platea dictumst vestibulum rhoncus est pellentesque elit.</p>
+
+		<div class="px-0">
+			<!-- <a href="#"><button class="mx-3">Sign Up</button></a>
+			<a href="#"><button class="mx-3 button-outline">Sign In</button></a> -->
+			<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+			<script>
+			  function onSignIn(googleUser) {
+			    // Useful data for your client-side scripts:
+			    var profile = googleUser.getBasicProfile();
+			    // The ID token you need to pass to your backend:
+			    var id_token = googleUser.getAuthResponse().id_token;
+			    console.log("ID Token: " + id_token);
+
+			    var logindata = {
+			    	'email': profile.getEmail(),
+			    	'name': profile.getName(),
+			    	'image': profile.getImageUrl(),
+			    	'token': id_token
+			    };
+
+			    var socket = io.connect('https://' + document.domain + ':' + location.port);
+			    socket.emit('login', logindata, function(res){
+			    	window.location.href='https://' + document.domain +'/app';
+			    });
+
+			  }
+			</script>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

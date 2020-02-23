@@ -1,0 +1,240 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<nav class="navbar fixed-top bg-dark navbar-dark py-0">			
+	<a class="navbar-brand d-flex flex-row align-items-center" href="#">
+		<img src="img/running2.svg" class="navbar-icon" />
+		<h2 class="nav-name d-md-block d-none">СпортТусовка</h2>
+	</a>
+	<ul class="navbar-nav d-flex flex-row">
+		<li class="nav-item">
+			<button class="nav-link" onclick="openRightBarFind();" >Знайти</button>
+		</li>
+		<li class="nav-item">
+			<button class="nav-link" onclick="alert('Просто клікни по потрібному місцю на мапі!');" >Створити</button>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" onclick="window.location.href='https://' + document.domain +'/account';"><b>Діма Іщук</b></a>
+		</li>
+	</ul>
+</nav>
+<div class="row mx-0 px-0">
+	<div class="col-12"></div>
+
+	<div id="find-right-bar" class="right-bar d-flex flex-column align-items-center">
+	    <a href="#" class="close-right-bar">
+	      <div></div>
+	      <div></div>
+	    </a>
+
+	    <div class="mt-5 pt-5">
+	      <div>
+	        <label for="event-date">Дата: </label>
+	        <input type="date" name="event-date" id="date_created">
+	        <div class="my-2">
+	          <label>Кілометраж, до: </label>
+	          <input style="width: 100px;" type="number" id="distance_upto" value="5">
+	          <label> км</label>
+	        </div>
+	        <div class="d-flex">
+	          <label>Складність: </label>
+	          <input class="mb-1 ml-2" type="range" min="1" max="5" id="level_upto" />
+	        </div>
+	        
+	      </div>
+	      <button class="mt-3 button-outline w-100" id="findevents">Знайти!</button>
+	      
+	    </div>
+
+	  </div>
+
+	  <div id="create-right-bar" class="right-bar d-flex flex-column align-items-center">
+	    <a href="#" class="close-right-bar">
+	      <div></div>
+	      <div></div>
+	    </a>
+
+	    <div class="mt-5 pt-5">
+	      <div>
+	        <label for="event-date">Дата: </label>
+	        <input type="date" name="event-date" id="creation_date">
+	        <input type="hidden" id="startlat" value="">
+	        <input type="hidden" id="startlon" value="">
+	        <input type="hidden" id="finishlat" value="">
+	        <input type="hidden" id="finishlon" value="">
+	        <div class="my-2">
+	          <label>Кілометраж: </label>
+	          <input style="width: 100px;" id="create_distance" type="number" value="1">
+	          <label> км</label>
+	        </div>
+	        <div class="d-flex">
+	          <label>Складність: </label>
+	          <input class="mb-1 ml-2" type="range" min="1" value="3" max="5" id="create_level" />
+	        </div>
+	      </div>
+	      
+	      
+	    </div>
+
+
+	    <button class="mt-3 button-outline w-100" id="createanevent">Створити</button>
+	  </div>
+
+</div>
+
+<script>
+	function openRightBarCreate(lat, lng){
+		$("#create-right-bar").css({'right':"0",'z-index':1000});
+		$("#find-right-bar").css("right", -$("#create-right-bar").width());
+		$('#startlat').val(lat);
+		$('#startlon').val(lng);
+	}
+	function openRightBarFind(){
+		$("#find-right-bar").css({'right':"0",'z-index':1000});
+		$("#create-right-bar").css("right", -$("#create-right-bar").width());
+	}
+	$(document).ready(function() {
+
+		$(".close-right-bar").click(function() {
+			$(this).parent().css("right", -$("#create-right-bar").width());
+		});
+	});
+</script>
+<style type="text/css">
+	.createpops{
+		display: block;
+		padding: 6px 10px;
+		border-radius: 20px;
+		border: 1px solid #785589;
+		background: #785589;
+		color: #fff;
+		text-align: center;
+	}
+	.createpops:hover{
+		cursor: pointer;
+
+	}
+
+</style>
+
+<div id="mapid" style="width: 100vw; height: calc(100vh - 70px);margin-top: 70px;"></div>
+
+
+<script>
+
+	function getLocation() {
+	  if (navigator.geolocation) {
+	    navigator.geolocation.getCurrentPosition(initter);
+	  } else {
+	    x.innerHTML = "Geolocation is not supported by this browser.";
+	  }
+	}
+	getLocation();
+
+	function initter(position){
+		var defLat =51.505;
+		var defLong = -0.09;
+		var redIcon = new L.Icon({
+		  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+		  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+		  iconSize: [25, 41],
+		  iconAnchor: [12, 41],
+		  popupAnchor: [1, -34],
+		  shadowSize: [41, 41]
+		});
+		defLat= position.coords.latitude;
+		defLong = position.coords.longitude;
+
+		var mymap = L.map('mapid').setView(L.latLng(defLat, defLong), 13);
+
+		L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+			maxZoom: 18,
+			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+				'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+				'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+			id: 'mapbox/streets-v11',
+			tileSize: 512,
+			zoomOffset: -1
+		}).addTo(mymap);
+
+		L.marker([defLat, defLong], {icon: redIcon}).addTo(mymap)
+			.bindPopup("<b>Це твоя локація</b>").openPopup();
+
+		// L.circle([51.508, -0.11], 500, {
+		// 	color: 'red',
+		// 	fillColor: '#f03',
+		// 	fillOpacity: 0.5
+		// }).addTo(mymap).bindPopup("I am a circle.");
+
+		// L.polygon([
+		// 	[51.509, -0.08],
+		// 	[51.503, -0.06],
+		// 	[51.51, -0.047]
+		// ]).addTo(mymap).bindPopup("I am a polygon.");
+
+
+		var popup = L.popup();
+
+
+		$('#createanevent').click(function(){
+			var eventdata = {
+				'datetime': $('#creation_date').val(),
+				'startlat': $('#startlat').val(),
+				'startlon': $('#startlon').val(),
+				'finishlat': null,
+				'finishon':null,
+				'length':$('#create_distance').val(),
+				'level':$('#create_level').val(),
+				'creatorid':1
+			};
+			var socket = io.connect('https://' + document.domain + ':' + location.port);
+			socket.emit('create_event', eventdata, function(res){
+				alert('data sent!');
+			});
+		});
+		var testlayer = '';
+		$('#findevents').click(function(){
+			var getterdata = {
+				'datetime': $('#date_created').val(),
+				'length': $('#distance_upto').val(),
+				'level': $('#level_upto').val()
+			};
+
+			var littleton = L.marker([50.416399, 30.653744]).bindPopup("<p>Свторено: Целузо Наталія</p><p>Коли? <b>23.02.2020, 17:30</b></p><p>Дистанція: ~3.2 km</p><p>Темп: 3/5</p>"),
+			    denver    = L.marker([50.397263, 30.635548]).bindPopup('This is Denver, CO.');
+
+			 testlayer =  L.layerGroup([littleton, denver]).addTo(mymap);
+			
+
+			var socket = io.connect('https://' + document.domain + ':' + location.port);
+			socket.emit('fetch_events', getterdata, function(res){
+				console.log(res);
+				alert('data sent!');
+			});
+			socket.on('fetch_events', function (res) {
+				console.log(res);
+			});
+
+		});
+
+		function onMapClick(e) {
+			if (mymap.hasLayer(testlayer)) {
+				mymap.removeLayer(testlayer);
+			}
+			
+			popup
+				.setLatLng(e.latlng)
+				.setContent("Координати: " + e.latlng.toString()+"<br><span class='createpops' id='create-right-bar-open' onclick='openRightBarCreate("+e.latlng.lat+","+e.latlng.lng+");'>Створити тусовку?</span>")
+				.openOn(mymap);
+
+		}
+
+		mymap.on('click', onMapClick);
+
+
+	}
+
+</script>
+
+{% endblock %}
