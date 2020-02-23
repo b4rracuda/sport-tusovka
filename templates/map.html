@@ -122,8 +122,7 @@
 
 
 <script>
-	
-	var socket = io.connect('https://' + document.domain + ':' + location.port);
+
 	function getLocation() {
 	  if (navigator.geolocation) {
 	    navigator.geolocation.getCurrentPosition(initter);
@@ -189,6 +188,7 @@
 				'level':$('#create_level').val(),
 				'creatorid':1
 			};
+			var socket = io.connect('https://' + document.domain + ':' + location.port);
 			socket.emit('create_event', eventdata, function(res){
 				alert('data sent!');
 			});
@@ -206,6 +206,8 @@
 
 			 testlayer =  L.layerGroup([littleton, denver]).addTo(mymap);
 			
+
+			var socket = io.connect('https://' + document.domain + ':' + location.port);
 			socket.emit('fetch_events', getterdata, function(res){
 				console.log(res);
 				alert('data sent!');
@@ -222,11 +224,11 @@
 				.setContent("Координати: " + e.latlng.toString()+"<br><span class='createpops' id='create-right-bar-open' onclick='openRightBarCreate("+e.latlng.lat+","+e.latlng.lng+");'>Створити тусовку?</span>")
 				.openOn(mymap);
 
-
 		}
 
 		mymap.on('click', onMapClick);
 
+		var socket = io.connect('https://' + document.domain + ':' + location.port);
 		socket.on('fetch_events', function (res) {
 			console.log(res);
 		});
