@@ -85,6 +85,10 @@
 </div>
 
 <script>
+	function openRightBarCreate(){
+		$("#create-right-bar").css("right", "0");
+		$("#find-right-bar").css("right", -$("#create-right-bar").width());
+	}
 	$(document).ready(function() {
 		$(".close-right-bar").click(function() {
 			$(this).parent().css("right", -$("#create-right-bar").width());
@@ -93,11 +97,6 @@
 		$("#find-right-bar-open").click(function() {
 			$("#find-right-bar").css("right", "0");
 			$("#create-right-bar").css("right", -$("#create-right-bar").width());
-		});
-
-		$("#create-right-bar-open").click(function() {
-			$("#create-right-bar").css("right", "0");
-			$("#find-right-bar").css("right", -$("#create-right-bar").width());
 		});
 	});
 </script>
@@ -181,12 +180,18 @@
 
 
 		var popup = L.popup();
-
+		var socket = io.connect('https://' + document.domain + ':' + location.port);
 		function onMapClick(e) {
+			var eventdata = {
+
+			};
 			popup
 				.setLatLng(e.latlng)
-				.setContent("Координати: " + e.latlng.toString()+"<br><span class='createpops' id='create-right-bar-open'>Створити тусовку?</span>")
+				.setContent("Координати: " + e.latlng.toString()+"<br><span class='createpops' id='create-right-bar-open' onclick='openRightBarCreate();'>Створити тусовку?</span>")
 				.openOn(mymap);
+				socket.emit('create_event', eventdata, function(res){
+					alert('data sent!');
+				});
 
 		}
 
