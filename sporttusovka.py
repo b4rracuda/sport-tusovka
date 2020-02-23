@@ -124,7 +124,6 @@ def register(data_from_google):
 @socketio.on('create_event')
 def create_event(event_details):
     print(event_details)
-    creator = Users.query.filter_by(email=event_details['email']).first()
     date = event_details['datetime']
     new_event = Event(
         datetime=20200223,
@@ -134,7 +133,7 @@ def create_event(event_details):
         finishlat=event_details['finishLat'],
         length=event_details['length'],
         level=event_details['level'],
-        creatorID=creator.id
+        creatorID=event_details['creatorID']
         )
     db.session.add(new_event)
     db.session.commit()
