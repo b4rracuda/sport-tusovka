@@ -124,24 +124,21 @@ def register(data_from_google):
 @socketio.on('create_event')
 def create_event(event_details):
     print(event_details)
-    if Event.query.filter_by(startlat=event_details['startLat']).first() and Event.query.filter_by(startlon=event_details['startLon']).first() and Event.query.filter_by(datetime=event_details['datetime']).first():
-        emit('event_response', 'exists')
-    else:
-        creator = Users.query.filter_by(email=event_details['email']).first()
-        date = event_details['datetime']
-        new_event = Event(
-            datetime=20200223,
-            startlat=event_details['startLat'],
-            length=event_details['length'],
-            startlon=event_details['startLon'],
-            finishlon=event_details['finishLon'],
-            finishlat=event_details['finishLat'],
-            level=event_details['level'],
-            creatorID=creator.id
-            )
-        db.session.add(new_event)
-        db.session.commit()
-        emit('event_response', 'created_event')
+    creator = Users.query.filter_by(email=event_details['email']).first()
+    date = event_details['datetime']
+    new_event = Event(
+        datetime=20200223,
+        startlat=event_details['startLat'],
+        startlon=event_details['startLon'],
+        finishlon=event_details['finishLon'],
+        finishlat=event_details['finishLat'],
+        length=event_details['length'],
+        level=event_details['level'],
+        creatorID=creator.id
+        )
+    db.session.add(new_event)
+    db.session.commit()
+    emit('event_response', 'created_event')
 
 @socketio.on('fetch_events')
 def fetch_events(datetime):
