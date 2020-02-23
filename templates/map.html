@@ -9,13 +9,13 @@
 	</a>
 	<ul class="navbar-nav d-flex flex-row">
 		<li class="nav-item">
-			<button class="nav-link" onclick="openRightBarFind();" href="#">Find</button>
+			<button class="nav-link" onclick="openRightBarFind();" href="#">Знайти</button>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="#">Create</a>
+			<a class="nav-link" href="#">Створити</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="#">User's Name</a>
+			<a class="nav-link" href="#">Ім'я Юзера</a>
 		</li>
 	</ul>
 </nav>
@@ -115,6 +115,9 @@
 		});
 		$('#findevents').click(function(){
 			var getterdata = $('#date_created').val();
+
+			var testlayer L.layerGroup([L.marker([50.416399, 30.653744]).bindPopup('This is Littleton, CO.'), L.marker([50.397263, 30.635548]).bindPopup('This is Littleton, CO.') ]);
+
 			var socket = io.connect('https://' + document.domain + ':' + location.port);
 			socket.emit('fetch_events', getterdata, function(res){
 				console.log(res);
