@@ -23,65 +23,63 @@
 	<div class="col-12"></div>
 
 	<div id="find-right-bar" class="right-bar d-flex flex-column align-items-center">
-		<a href="" class="close-right-bar">
-			<div></div>
-			<div></div>
-		</a>
+	    <a href="#" class="close-right-bar">
+	      <div></div>
+	      <div></div>
+	    </a>
 
-		<div class="mt-5 pt-5">
-			<div>
-				<label for="event-date">Дата: </label>
-				<input type="date" name="event-date" id="date_created">
-				<div class="mb-2">
-					<label>Кілометраж, до: </label>
-					<input style="width: 100px;" type="number" id="distance_upto" value="5">
-					<label> км</label>
-				</div>
-				<div>
-					<label>Складність, до: </label>
-					<input type="range" min="1" max="5" id="level_upto" />
-				</div>
-				
-			</div>
-			<button class="mx-3 button-outline" id="findevents">Знайти!</button>
-			
-		</div>
+	    <div class="mt-5 pt-5">
+	      <div>
+	        <label for="event-date">Дата: </label>
+	        <input type="date" name="event-date" id="date_created">
+	        <div class="my-2">
+	          <label>Кілометраж, до: </label>
+	          <input style="width: 100px;" type="number" id="distance_upto" value="5">
+	          <label> км</label>
+	        </div>
+	        <div class="d-flex">
+	          <label>Складність: </label>
+	          <input class="mb-1 ml-2" type="range" min="1" max="5" id="level_upto" />
+	        </div>
+	        
+	      </div>
+	      <button class="mt-3 button-outline w-100" id="findevents">Знайти!</button>
+	      
+	    </div>
 
-	</div>
+	  </div>
 
-	<div id="create-right-bar" class="right-bar d-flex flex-column align-items-center">
-		<a href="" class="close-right-bar">
-			<div></div>
-			<div></div>
-		</a>
+	  <div id="create-right-bar" class="right-bar d-flex flex-column align-items-center">
+	    <a href="#" class="close-right-bar">
+	      <div></div>
+	      <div></div>
+	    </a>
 
-		<div class="mt-5 pt-5">
-			<div>
-				<label for="event-date">Дата: </label>
-				<input type="date" name="event-date" id="creation_date">
-				<input type="hidden" id="startlat" value="">
-				<input type="hidden" id="startlon" value="">
-				<input type="hidden" id="finishlat" value="">
-				<input type="hidden" id="finishlon" value="">
-				<div class="mb-2">
-					<label>Кілометраж: </label>
-					<input style="width: 100px;" id="create_distance" type="number" value="1">
-					<label> км</label>
-				</div>
-				<div>
-					<label>Складність: </label>
-					<input type="range" id="create_level" min="1" value="3" max="5"/>
-				</div>
-				
-
-			</div>
-			
-			
-		</div>
+	    <div class="mt-5 pt-5">
+	      <div>
+	        <label for="event-date">Дата: </label>
+	        <input type="date" name="event-date" id="creation_date">
+	        <input type="hidden" id="startlat" value="">
+	        <input type="hidden" id="startlon" value="">
+	        <input type="hidden" id="finishlat" value="">
+	        <input type="hidden" id="finishlon" value="">
+	        <div class="my-2">
+	          <label>Кілометраж: </label>
+	          <input style="width: 100px;" id="create_distance" type="number" value="1">
+	          <label> км</label>
+	        </div>
+	        <div class="d-flex">
+	          <label>Складність: </label>
+	          <input class="mb-1 ml-2" type="range" min="1" value="3" max="5" id="create_level" />
+	        </div>
+	      </div>
+	      
+	      
+	    </div>
 
 
-		<button class="mx-3 button-outline" id="createanevent">Створити</button>
-	</div>
+	    <button class="mt-3 button-outline w-100" id="createanevent">Створити</button>
+	  </div>
 
 </div>
 
